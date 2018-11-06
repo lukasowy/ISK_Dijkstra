@@ -13,27 +13,35 @@ function randomCircle(){
     window.dy = (Math.random() - 0.5) * 30
 }
 
-class Circle{
-    constructor(x, y, dx, dy, radius){
+class Node{
+    constructor(value){
         this.x = x
         this.y = y
         this.dx = dx
         this.dy = dy
+        this.value = value
         this.radius = radius
     }
 
-    draw(){
+    addNode(value){
         c.beginPath()
         c.arc(this.x, this.y, this.radius, 0, 2*Math.PI)
         c.fillStyle = 'orangered'
         c.strokeStyle = 'red'
+        c.fillStyle = 'red';
+        c.shadowColor = '#999';
+        c.shadowBlur = 20;
+        c.shadowOffsetX = 1;
+        c.shadowOffsetY = 1;
         c.fill()
         c.stroke()
+        c.font = '20pt Calibri';
+        c.fillStyle = 'black';
+        c.fillText(value, this.x - 8, this.y + 5);
     }
 
     showCircle(){
         
-    this.draw()
     if(this.x + this.radius >= innerWidth || this.x - this.radius <= 0){
         this.dx = -this.dx
     }
@@ -46,20 +54,15 @@ class Circle{
     }
 }
 
-randomCircle()
-var circle = new Circle(x, y, dx, dy, radius)
 
 randomCircle()
-var circle2 = new Circle(x, y, dx, dy, radius)
+var node = new Node(1)
 
 function animate(){
     requestAnimationFrame(animate)
     
     c.clearRect(0,0,innerWidth, innerHeight)
 
-    circle.showCircle()
-
-    circle2.showCircle()
+    node.addNode(1);
 }
-
 animate()
