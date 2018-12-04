@@ -7,7 +7,6 @@ import { updateTarget } from "../store/store";
 class Node extends React.Component {
     componentDidMount() {
         console.log("target mounted", this.props.target.id);
-        // if a target is dragging we need to trigger drag&drop manually
         if (this.props.target.isDragging) {
             this.node.startDrag();
         }
@@ -16,6 +15,9 @@ class Node extends React.Component {
         console.log("target unmounted", this.props.target.id);
     }
     handleDragStart = e => {
+        this.props.updateTarget(this.props.target.id, {
+            isDragging: true
+        });
         e.target.setAttrs({
             shadowOffset: {
                 x: 15,
@@ -23,9 +25,6 @@ class Node extends React.Component {
             },
             scaleX: 1.1,
             scaleY: 1.1
-        });
-        this.props.updateTarget(this.props.target.id, {
-            isDragging: true
         });
     };
     handleDragMove = () => {
@@ -36,22 +35,23 @@ class Node extends React.Component {
             x: this.node.x(),
             y: this.node.y()
         });
+        console.log("move ", this.props.target.id);
     };
     handleDragEnd = e => {
-        e.target.to({
-            duration: 1.5,
-            easing: Konva.Easings.ElasticEaseOut,
-            scaleX: 1,
-            scaleY: 1,
-            shadowOffsetX: 5,
-            shadowOffsetY: 5
-        });
         if (!this.node) {
             return;
         }
         console.log("drag end", this.props.target.id);
         this.props.updateTarget(this.props.target.id, {
             isDragging: false
+        });
+        e.target.to({
+            duration: 1.5,
+            easing: Konva.Easings.ElasticEaseOut,
+            scaleX: 1,
+            scaleY: 1,
+            shadowOffsetX: 3,
+            shadowOffsetY: 3
         });
     };
     render() {
@@ -61,9 +61,11 @@ class Node extends React.Component {
                 x={target.x}
                 y={target.y}
                 radius={20}
-                fill={target.isDragging ? "red" : "rgb(223, 212, 186)"}
+                fill={target.isDragging ? "grey" : "rgb(223, 212, 186)"}
                 shadowColor="black"
                 shadowBlur={10}
+                shadowOffsetX = {3}
+                shadowOffsetY = {3}
                 shadowOpacity={0.6}
                 onDragStart={this.handleDragStart}
                 onDragMove={this.handleDragMove}

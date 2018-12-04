@@ -6,8 +6,8 @@ function generateTargets() {
   for (var i = 1; i < NUMBER; i++) {
     targets.push({
       id: i,
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
+      x: window.innerWidth/2 - 300 + (50 * i),
+      y: window.innerHeight/2 - 300 + (50 * i) ,
       isDragging: false
     });
   }

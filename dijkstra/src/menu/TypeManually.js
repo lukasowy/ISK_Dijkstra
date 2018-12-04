@@ -25,6 +25,7 @@ class TypeManually extends React.Component {
             <Container>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup >
+                        <Label style={this.divStyle} for="exampleFile">File</Label>
                         <InputGroup size="sm">
                             <InputGroupAddon addonType="prepend">X</InputGroupAddon>
                             <Input placeholder="" type="number" min="0" step="1" value={this.state.value} onChange={this.handleChange} />
@@ -57,9 +58,14 @@ class TypeManually extends React.Component {
                         <FormText color="muted">
                             Load the graph from the device.
                         </FormText>
-                        <Label style={this.divStyle} for="exampleFile">File</Label>
                         <Input style={this.divStyle} type="file" name="file" id="exampleFile" />
+
                     </FormGroup>
+                    <FormText color="muted">
+                        Generate random graph.
+                        </FormText>
+                    <Button color="secondary" size="md" block>Generate</Button>
+                    <br />
                     <Button >Start</Button>
                 </Form>
             </Container>

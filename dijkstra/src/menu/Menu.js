@@ -8,7 +8,7 @@ class Menu extends React.Component {
     render() {
         return (
             <div className="sidenav">
-                <Col sm="12" sm={{ size: 6, offset: 2 }}>
+                <Col sm={{ size: 6, offset: 2 }}>
                     <h1> <Badge color="secondary">Dijkstra</Badge></h1>
                 </Col>
                 <TypeManually />
