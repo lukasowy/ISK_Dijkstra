@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Stage, Layer, Text } from 'react-konva';
 import Node from './shapes/Node'
+import MyArrow from './shapes/MyArrow';
 
 class Dijkstra extends Component {
-    random = Math.floor((Math.random() * 200) + 1);
     render() {
         const { targets } = this.props;
 
@@ -12,13 +12,15 @@ class Dijkstra extends Component {
             < Stage width={window.innerWidth} height={window.innerHeight} >
                 <Layer>
 
-                    {targets.map( (t, key) => {
+                    {targets.map((t, key) => {
+                        return <MyArrow key={key} target={t} />;
+                    })}
+                    {targets.map((t, key) => {
                         return <Node key={key} target={t} />;
                     })}
-                    {targets.map( (t, key) => {
-                        return <Text key={key} x={t.x - 35} y={t.y - 35} text={t.id} fontSize={20} />;
+                    {targets.map((t, key) => {
+                        return <Text fill = '#6c757d'  key={key} x={t.x - 35} y={t.y - 35} text={t.id} fontSize={20} />;
                     })}
-
                 </Layer>
             </Stage >
         )

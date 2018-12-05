@@ -47,5 +47,5 @@ export const updateTarget = (id, attrs) => ({
 });
 
 console.log(createStore(reducer));
-
+console.log(initialState)
 export default () => createStore(reducer);

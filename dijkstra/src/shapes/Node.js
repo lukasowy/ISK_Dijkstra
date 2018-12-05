@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import { updateTarget } from "../store/store";
 
 class Node extends React.Component {
-    componentDidMount() {
-        console.log("target mounted", this.props.target.id);
+    componentDidMount = () => {
+        // console.log("target mounted", this.props.target.id);
         if (this.props.target.isDragging) {
             this.node.startDrag();
         }
     }
-    componentWillUnmount() {
-        console.log("target unmounted", this.props.target.id);
+    componentWillUnmount = () => {
+        // console.log("target unmounted", this.props.target.id);
     }
     handleDragStart = e => {
         this.props.updateTarget(this.props.target.id, {
@@ -35,13 +35,13 @@ class Node extends React.Component {
             x: this.node.x(),
             y: this.node.y()
         });
-        console.log("move ", this.props.target.id);
+        // console.log("move ", this.props.target.id);
     };
     handleDragEnd = e => {
         if (!this.node) {
             return;
         }
-        console.log("drag end", this.props.target.id);
+        // console.log("drag end", this.props.target.id);
         this.props.updateTarget(this.props.target.id, {
             isDragging: false
         });

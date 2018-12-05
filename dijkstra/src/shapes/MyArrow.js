@@ -1,17 +1,14 @@
 import React from 'react';
 import { Arrow } from 'react-konva';
 import Konva from 'konva';
+import { connect } from "react-redux";
+import { updateTarget } from "../store/store";
 
 class MyArrow extends React.Component {
     state = {
-        x: this.props.x,
-        y: this.props.y,
-        color: 'green'
-    };
-    handleClick = () => {
-        this.setState({
-            color: Konva.Util.getRandomColor()
-        });
+        // x: this.props.x,
+        // y: this.props.y,
+        color: '#6C757D'
     };
     handleDragStart = e => {
         e.target.setAttrs({
@@ -34,29 +31,31 @@ class MyArrow extends React.Component {
             shadowOffsetY: 5
         });
     };
-    
+
     render() {
+        const { target } = this.props;
         return (
             <Arrow
-                draggable
-                x={this.state.x}
-                y={this.state.y}
-                points={[200, 200, 100, 200]}
-                pointerLength={20}
-                pointerWidth={20}
+                points={[target.x, target.y, 1000, 200]}
+                pointerLength={10}
+                pointerWidth={10}
                 fill={this.state.color}
                 stroke={this.state.color}
                 strokeWidth={4}
                 shadowColor="black"
                 shadowBlur={10}
                 shadowOpacity={0.6}
-                onClick={this.handleClick}
                 onDragStart={this.handleDragStart}
                 onDragEnd={this.handleDragEnd}
+                ref={node => {
+                    this.node = node;
+                }}
             />
-            
+
         );
     }
 }
 
-export default MyArrow;
+export default connect(null, {
+    updateTarget
+})(MyArrow);
