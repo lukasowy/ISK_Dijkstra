@@ -64,8 +64,8 @@ class Node extends React.Component {
                 fill={target.isDragging ? "grey" : "rgb(223, 212, 186)"}
                 shadowColor="black"
                 shadowBlur={10}
-                shadowOffsetX = {3}
-                shadowOffsetY = {3}
+                shadowOffsetX={3}
+                shadowOffsetY={3}
                 shadowOpacity={0.6}
                 onDragStart={this.handleDragStart}
                 onDragMove={this.handleDragMove}

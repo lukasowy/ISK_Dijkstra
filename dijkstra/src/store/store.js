@@ -6,8 +6,8 @@ function generateTargets() {
   for (var i = 1; i < NUMBER; i++) {
     targets.push({
       id: i,
-      x: window.innerWidth/2 - 300 + (50 * i),
-      y: window.innerHeight/2 - 300 + (50 * i) ,
+      x: window.innerWidth / 2 - 300 + (50 * i),
+      y: window.innerHeight / 2 - 300 + (50 * i),
       isDragging: false
     });
   }
@@ -17,7 +17,7 @@ function generateTargets() {
 const initialState = {
   targets: generateTargets()
 };
- 
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_TARGET": {
