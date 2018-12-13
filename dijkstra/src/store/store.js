@@ -1,21 +1,10 @@
 import { createStore } from "redux";
+import Graph from "../dijkstra/Graph";
 
-function generateTargets() {
-  const NUMBER = 10;
-  const targets = [];
-  for (var i = 1; i < NUMBER; i++) {
-    targets.push({
-      id: i,
-      x: window.innerWidth / 2 - 300 + (50 * i),
-      y: window.innerHeight / 2 - 300 + (50 * i),
-      isDragging: false
-    });
-  }
-  return targets;
-}
+var graph = new Graph(10);
 
 const initialState = {
-  targets: generateTargets()
+  targets: graph.generateGraph()
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,6 +19,7 @@ const reducer = (state = initialState, action) => {
           ...action.payload.attrs
         };
       });
+
       return {
         ...state,
         targets
@@ -48,4 +38,5 @@ export const updateTarget = (id, attrs) => ({
 
 console.log(createStore(reducer));
 console.log(initialState)
+
 export default () => createStore(reducer);

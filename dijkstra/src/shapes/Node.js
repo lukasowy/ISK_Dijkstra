@@ -35,7 +35,7 @@ class Node extends React.Component {
             x: this.node.x(),
             y: this.node.y()
         });
-        // console.log("move ", this.props.target.id);
+        console.log("x:", this.props.target.x, " y:", this.props.target.y );
     };
     handleDragEnd = e => {
         if (!this.node) {
