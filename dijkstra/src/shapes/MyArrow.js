@@ -2,12 +2,10 @@ import React from 'react';
 import { Arrow } from 'react-konva';
 import Konva from 'konva';
 import { connect } from "react-redux";
-import { updateTarget } from "../store/store";
+import { updateEdges } from "../actions/updateEdges";
 
 class MyArrow extends React.Component {
     state = {
-        // x: this.props.x,
-        // y: this.props.y,
         color: '#6C757D'
     };
     handleDragStart = e => {
@@ -19,7 +17,6 @@ class MyArrow extends React.Component {
             scaleX: 1.1,
             scaleY: 1.1
         });
-        console.log(e.target.attrs.x)
     };
     handleDragEnd = e => {
         e.target.to({
@@ -33,10 +30,10 @@ class MyArrow extends React.Component {
     };
 
     render() {
-        const { target } = this.props;
+        const { target_1, target_2 } = this.props;
         return (
             <Arrow
-                points={[target.x, target.y, 1000, 200]}
+                points={[target_1.x, target_1.y, target_2.x, target_2.y]}
                 pointerLength={10}
                 pointerWidth={10}
                 fill={this.state.color}
@@ -56,6 +53,4 @@ class MyArrow extends React.Component {
     }
 }
 
-export default connect(null, {
-    updateTarget
-})(MyArrow);
+export default connect(null, { updateEdges })(MyArrow);

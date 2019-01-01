@@ -2,7 +2,8 @@ import React from 'react';
 import { Circle } from 'react-konva';
 import Konva from 'konva';
 import { connect } from "react-redux";
-import { updateTarget } from "../store/store";
+import { bindActionCreators } from "redux";
+import { updateEdges } from "../actions/updateEdges";
 
 class Node extends React.Component {
     componentDidMount = () => {
@@ -15,7 +16,7 @@ class Node extends React.Component {
         // console.log("target unmounted", this.props.target.id);
     }
     handleDragStart = e => {
-        this.props.updateTarget(this.props.target.id, {
+        this.props.updateEdges(this.props.target.id, {
             isDragging: true
         });
         e.target.setAttrs({
@@ -31,18 +32,18 @@ class Node extends React.Component {
         if (!this.node) {
             return;
         }
-        this.props.updateTarget(this.props.target.id, {
+        this.props.updateEdges(this.props.target.id, {
             x: this.node.x(),
             y: this.node.y()
         });
-        console.log("x:", this.props.target.x, " y:", this.props.target.y );
+        // console.log("x:", this.props.target.x, " y:", this.props.target.y);
     };
     handleDragEnd = e => {
         if (!this.node) {
             return;
         }
         // console.log("drag end", this.props.target.id);
-        this.props.updateTarget(this.props.target.id, {
+        this.props.updateEdges(this.props.target.id, {
             isDragging: false
         });
         e.target.to({
@@ -56,8 +57,9 @@ class Node extends React.Component {
     };
     render() {
         const { target } = this.props;
+        // console.log(target)
         return (
-            <Circle draggable
+            <Circle
                 x={target.x}
                 y={target.y}
                 radius={20}
@@ -77,7 +79,7 @@ class Node extends React.Component {
         );
     }
 }
+const matchDispatchToProps = dispatch => bindActionCreators({ updateEdges }, dispatch);
 
-export default connect(null, {
-    updateTarget
-})(Node);
+
+export default connect(null, matchDispatchToProps)(Node);
