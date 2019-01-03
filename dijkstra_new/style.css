@@ -1,0 +1,55 @@
+.vertex circle {
+    stroke: #bdbdbd;
+    fill: white;
+    stroke-width: 2;
+}
+
+.vertex.visited circle {
+    fill: #fdbb84;
+}
+
+.vertex.from circle {
+    stroke: green;
+    stroke-width: 2;
+}
+
+.vertex.to circle {
+    stroke: blue;
+    stroke-width: 2;
+}
+
+.vertex.path circle {
+    stroke: #2ca25f;
+    fill: #2ca25f;
+}
+
+.vertex.from.path circle {
+    fill: green;
+    stroke: #2ca25f;
+    stroke-width: 4;
+}
+
+.vertex.to.path circle {
+    stroke: #2ca25f;
+    stroke-width: 4;
+}
+
+.edge line {
+    stroke: #bdbdbd;
+    stroke-width: 3;
+}
+
+.edge.path line {
+    stroke: #2ca25f;
+    stroke-width: 7;
+}
+
+text.weight {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+text.distance {
+    font-size: 10px;
+    font-weight: bold;
+}
