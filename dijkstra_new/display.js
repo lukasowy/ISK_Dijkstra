@@ -1,4 +1,4 @@
-var dijkstra = new dijkstra().interval(1).rows(12).cols(20);
+var dijkstra = new dijkstra().interval(1).rows(6).cols(7);
 
 var svg = d3.select("#chart").append("svg")
     .attr("width", 960)

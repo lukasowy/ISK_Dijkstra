@@ -119,7 +119,7 @@ function dijkstra() {
 	this._edges    = [];
 	this._unvisited = [];
 	this._found = false;
-	this._interval = 5;
+	this._interval = 15;
 	this._from = null;
 	this._to = null;
 	this._running = false;
