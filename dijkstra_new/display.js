@@ -146,7 +146,6 @@ var repaint = function () {
                 return d.distance() != Infinity ? d.distance() : "";
             })
     })
-
 }
 
 dijkstra.onStart(repaint).onStep(repaint).start();
@@ -155,10 +154,21 @@ dijkstra.onStart(repaint).onStep(repaint).start();
 d3.select("#rows").on("change", function () {
     d3.selectAll(".vertex").remove();
     d3.selectAll(".edge").remove();
-    dijkstra.rows(+this.value).init();
+    dijkstra.rows(+this.value).cols(+this.value).init();
 });
-d3.select("#cols").on("change", function () {
+// d3.select("#cols").on("change", function () {
+//     d3.selectAll(".vertex").remove();
+//     d3.selectAll(".edge").remove();
+//     dijkstra.cols(+this.value).init();
+// });
+
+d3.select("#start").on("click", function () {
     d3.selectAll(".vertex").remove();
     d3.selectAll(".edge").remove();
-    dijkstra.cols(+this.value).init();
+    dijkstra.cols(d3.select("#cols").node().value).init();
 });
+// d3.select("#start").on("click", function () {
+//     d3.selectAll(".vertex").remove();
+//     d3.selectAll(".edge").remove();
+//     dijkstra.rows(d3.select("#rows").node().value).init();
+// });

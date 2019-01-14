@@ -1,19 +1,22 @@
+<!DOCTYPE html>
 <html>
 
 <head>
   <title>Dijkstra</title>
   <link rel="stylesheet" href="style.css">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js" charset="utf-8"></script>
-
-
 </head>
 
 <body>
-
-  <!-- Rows:<input id="rows" type="number" min="3" , max="15" width="40" value="15" />
-  Columns:<input id="cols" type="number" min="3" , max="25" width="40" value="20" /> -->
-
-  <div id="chart"></div>
+  <div class="sidenav">
+    No edges:<input id="" type="number" min="1" , max="4" value="4" />
+    Min cost:<input id="" type="number" min="1" , max="10" value="1" />
+    Max cost:<input id="" type="number" min="1" , max="10" value="10" />
+    Columns:<input id="cols" type="number" min="3" , max="25" value="7" />
+    Rows:<input id="rows" type="number" min="3" , max="15" value="6" />
+    <button id="start">Generate</button>
+  </div>
+  <div id="chart" class="main"></div>
 
   <script src="./dijkstra.js"></script>
   <script src="./display.js"></script>
