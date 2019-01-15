@@ -14,7 +14,7 @@ var repaint = function () {
         .domain([0, dijkstra.rows() * 30])
         .range([0, svg.attr("height")]);
 
-    var radius = (svg.attr("width") > svg.attr("height")) ? yscale(7) : xscale(7);
+    var radius = (svg.attr("width") > svg.attr("height")) ? yscale(8) : xscale(8);
 
     // Edges
     var edge = svg.selectAll(".edge").data(dijkstra.edges(), function (e) {
@@ -150,23 +150,46 @@ var repaint = function () {
 
 dijkstra.onStart(repaint).onStep(repaint).start();
 
-
 d3.select("#rows").on("change", function () {
     d3.selectAll(".vertex").remove();
     d3.selectAll(".edge").remove();
     dijkstra.rows(+this.value).cols(+this.value).init();
 });
-// d3.select("#cols").on("change", function () {
-//     d3.selectAll(".vertex").remove();
-//     d3.selectAll(".edge").remove();
-//     dijkstra.cols(+this.value).init();
-// });
+
+d3.select("#cols").on("change", function () {
+    d3.selectAll(".vertex").remove();
+    d3.selectAll(".edge").remove();
+    dijkstra.cols(+this.value).init();
+});
+
+d3.select("#edges").on("change", function () {
+    d3.selectAll(".vertex").remove();
+    d3.selectAll(".edge").remove();
+    dijkstra.edges_outputs(+this.value).init();
+});
+
+d3.select("#maxcost").on("change", function () {
+    d3.selectAll(".vertex").remove();
+    d3.selectAll(".edge").remove();
+    dijkstra.maxcost(+this.value).init();
+});
+
+d3.select("#mincost").on("change", function () {
+    d3.selectAll(".vertex").remove();
+    d3.selectAll(".edge").remove();
+    dijkstra.mincost(+this.value).init();
+});
 
 d3.select("#start").on("click", function () {
     d3.selectAll(".vertex").remove();
     d3.selectAll(".edge").remove();
-    dijkstra.cols(d3.select("#cols").node().value).init();
+    dijkstra.cols(d3.select("#cols").node().value)
+        .edges_outputs(d3.select("#edges").node().value)
+        .maxcost(d3.select("#maxcost").node().value)
+        .mincost(d3.select("#mincost").node().value).init();
 });
+
+// .edges_output(d3.select("#edges").node().value)
 // d3.select("#start").on("click", function () {
 //     d3.selectAll(".vertex").remove();
 //     d3.selectAll(".edge").remove();

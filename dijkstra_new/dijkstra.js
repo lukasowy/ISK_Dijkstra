@@ -4,6 +4,23 @@
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
+	function Settings() {
+		this._maxcost = 8
+		this._mincost = 0
+	}
+
+	Settings.prototype.maxcost = function (maxcost) {
+		if (!arguments.length) return this._maxcost;
+		this._maxcost = maxcost;
+		return this;
+	}
+	Settings.prototype.mincost = function (mincost) {
+		if (!arguments.length) return this._mincost;
+		this._mincost = mincost;
+		return this;
+	}
+	var settings = new Settings();
+
 	/**
 	 * Vertex 
 	 */
@@ -79,11 +96,12 @@
 	 */
 	function Edge(source, destination) {
 		this._id = source.id() + "_" + destination.id();
-		this._weight = Math.ceil(Math.random() * 10);
+		this._weight = Math.floor(Math.random() * (settings.maxcost() - settings.mincost()) + settings.mincost());
 		this._source = source,
 			this._destination = destination;
 		this._path = false;
 	}
+
 	Edge.prototype.id = function () {
 		return this._id;
 	}
@@ -113,8 +131,11 @@
 	 */
 
 	function dijkstra() {
+		this._mincost = 0;
+		this._maxcost = 10;
 		this._rows = 10;
 		this._cols = 15;
+		this._edges_output = 4;
 		this._vertices = [];
 		this._edges = [];
 		this._unvisited = [];
@@ -211,6 +232,22 @@
 		this._cols = cols;
 		return this;
 	}
+	//Here
+	dijkstra.prototype.edges_outputs = function (out) {
+		if (!arguments.length) return this._edges_output;
+		this._edges_output = out;
+		return this;
+	}
+	dijkstra.prototype.maxcost = function (cost) {
+		if (!arguments.length) return this._maxcost;
+		this._maxcost = cost;
+		return this;
+	}
+	dijkstra.prototype.mincost = function (cost) {
+		if (!arguments.length) return this._mincost;
+		this._mincost = cost;
+		return this;
+	}
 	dijkstra.prototype.from = function (from) {
 		if (!arguments.length) return this._from;
 		this._from = from;
@@ -253,6 +290,8 @@
 		that.found(false);
 		that.running(false);
 		that.start();
+		settings.maxcost(that.maxcost());
+		settings.mincost(that.mincost());
 	}
 	dijkstra.prototype.reset = function () {
 		var that = this;
@@ -288,7 +327,7 @@
 					var neighbors = that.neighbors(vertex);
 					var maxEdges = randomInt(1, neighbors.length);
 					for (var i = 0; i < maxEdges; i++) {
-						if (vertex.edges().length < 4 && i < neighbors.length) {
+						if (vertex.edges().length < that.edges_outputs() && i < neighbors.length) {
 							var edge = vertex.connect(neighbors[i]);
 							that.addEdge(edge);
 						}
